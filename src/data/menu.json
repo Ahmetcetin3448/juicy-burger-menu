@@ -1,0 +1,331 @@
+{
+  "_hakkinda": "Basılı menü fotoğrafından çıkarılmış ilk veri. src/data/menu.json olarak kullanılacak. Fiyatlar TL, KDV dahil varsayıldı. 'reviewQueue' bölümündeki maddeler işletme sahibi tarafından onaylanmadan yayına çıkmamalı.",
+
+  "reviewQueue": [
+    "ÇITIR kategorisindeki 7 ürünün hiçbirinin fiyatı basılı menüde yazılı değil — fiyatlar alınmalı.",
+    "CAJUN DÜRÜM ve VEJETERYAN BURGER için içindekiler basılı menüde yazılı değil — sahibinden alınmalı.",
+    "BBQ CAJUN DÜRÜM tek fiyatı el yazısında belirsiz (230 mu 234 mü). 230 varsayıldı, doğrulanmalı.",
+    "JUICY BURGER içeriğinde 'panketten kaşar' yazıyor — yazım/okuma belirsiz, doğrulanmalı.",
+    "MEXICANO CHICKEN içeriğinde 'turbo soğan' yazıyor — 'turşu, soğan' olabilir, doğrulanmalı.",
+    "'MENÜ' fiyatının neyi kapsadığı menüde yazmıyor (patates + içecek?). settings.menuIncludes alanına yazılmalı.",
+    "ALERJEN BİLGİSİ HİÇBİR ÜRÜNDE DOLDURULMADI. Alerjen, malzemeden tahmin edilemez (sos içerikleri, çapraz bulaşma, tedarikçi değişikliği). Sahibi tek tek onaylamalı.",
+    "İngilizce içindekiler çevirileri taslaktır, sahibi/çevirmen gözden geçirmeli."
+  ],
+
+  "settings": {
+    "business_name": "",
+    "currency": "TRY",
+    "menuIncludes_tr": "",
+    "menuIncludes_en": "",
+    "notice_tr": "Fiyatlarımıza KDV dahildir.",
+    "notice_en": "All prices include VAT."
+  },
+
+  "categories": [
+    { "slug": "burger",          "name_tr": "Burger",          "name_en": "Burgers",              "sort_order": 1 },
+    { "slug": "tavuk-burger",    "name_tr": "Tavuk Burger",    "name_en": "Chicken Burgers",      "sort_order": 2 },
+    { "slug": "oburix",          "name_tr": "Oburix",          "name_en": "Oburix",               "sort_order": 3 },
+    { "slug": "baget-sandvic",   "name_tr": "Baget Sandviç",    "name_en": "Baguette Sandwiches",  "sort_order": 4 },
+    { "slug": "cajun-durum",     "name_tr": "Cajun Dürüm",      "name_en": "Cajun Wraps",          "sort_order": 5 },
+    { "slug": "etsiz-burger",    "name_tr": "Etsiz Burger",     "name_en": "Meatless Burgers",     "sort_order": 6 },
+    { "slug": "citir",           "name_tr": "Çıtır",            "name_en": "Crispy Sides",         "sort_order": 7 }
+  ],
+
+  "products": [
+    {
+      "category": "burger", "sort_order": 1,
+      "name_tr": "Classic Burger", "name_en": "Classic Burger",
+      "weight_g": 120,
+      "price_single": 260, "price_menu": 300,
+      "ingredients_tr": ["burger köfte", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "burger sos", "turşu"],
+      "ingredients_en": ["beef patty", "caramelized onion", "lettuce", "tomato", "red onion", "burger sauce", "pickles"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 2,
+      "name_tr": "Cheese Burger", "name_en": "Cheese Burger",
+      "weight_g": 120,
+      "price_single": 270, "price_menu": 310,
+      "ingredients_tr": ["burger köfte", "cheddar", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "burger sos", "turşu"],
+      "ingredients_en": ["beef patty", "cheddar", "caramelized onion", "lettuce", "tomato", "red onion", "burger sauce", "pickles"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 3,
+      "name_tr": "BBQ Burger", "name_en": "BBQ Burger",
+      "weight_g": 120,
+      "price_single": 270, "price_menu": 310,
+      "ingredients_tr": ["burger köfte", "cheddar", "BBQ sos", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "turşu"],
+      "ingredients_en": ["beef patty", "cheddar", "BBQ sauce", "caramelized onion", "lettuce", "tomato", "red onion", "pickles"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 4,
+      "name_tr": "Mushroom Burger", "name_en": "Mushroom Burger",
+      "weight_g": 120,
+      "price_single": 290, "price_menu": 320,
+      "ingredients_tr": ["burger köfte", "sotelenmiş mantar", "kaşar", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "turşu"],
+      "ingredients_en": ["beef patty", "sautéed mushrooms", "kaşar cheese", "caramelized onion", "lettuce", "tomato", "red onion", "pickles"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 5,
+      "name_tr": "Mexicano Burger", "name_en": "Mexicano Burger",
+      "weight_g": 120,
+      "price_single": 270, "price_menu": 310,
+      "ingredients_tr": ["burger köfte", "cheddar", "taco baharatı", "jalapeno", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "özel sos", "turşu"],
+      "ingredients_en": ["beef patty", "cheddar", "taco seasoning", "jalapeño", "caramelized onion", "lettuce", "tomato", "red onion", "house sauce", "pickles"],
+      "badges": ["acili"], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 6,
+      "name_tr": "Smokey Burger", "name_en": "Smokey Burger",
+      "weight_g": 120,
+      "price_single": 300, "price_menu": 340,
+      "ingredients_tr": ["burger köfte", "füme et", "cheddar", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "BBQ sos", "turşu"],
+      "ingredients_en": ["beef patty", "smoked beef", "cheddar", "caramelized onion", "lettuce", "tomato", "red onion", "BBQ sauce", "pickles"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 7,
+      "name_tr": "Ranch Burger", "name_en": "Ranch Burger",
+      "weight_g": 120,
+      "price_single": 300, "price_menu": 340,
+      "ingredients_tr": ["burger köfte", "cheddar", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "ranch sos", "turşu"],
+      "ingredients_en": ["beef patty", "cheddar", "caramelized onion", "lettuce", "tomato", "red onion", "ranch sauce", "pickles"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 8,
+      "name_tr": "Juicy Burger", "name_en": "Juicy Burger",
+      "weight_g": 120,
+      "price_single": 300, "price_menu": 340,
+      "ingredients_tr": ["burger köfte", "cheddar", "panketten kaşar", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "burger sos", "turşu"],
+      "ingredients_en": ["beef patty", "cheddar", "panketten kaşar", "caramelized onion", "lettuce", "tomato", "red onion", "burger sauce", "pickles"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "burger", "sort_order": 9,
+      "name_tr": "Duble Burger", "name_en": "Double Burger",
+      "weight_g": 240,
+      "price_single": 360, "price_menu": 400,
+      "ingredients_tr": ["burger köfte", "cheddar", "karamelize soğan", "kıvırcık", "domates", "mor soğan", "burger sos", "turşu"],
+      "ingredients_en": ["beef patty", "cheddar", "caramelized onion", "lettuce", "tomato", "red onion", "burger sauce", "pickles"],
+      "badges": [], "allergens": []
+    },
+
+    {
+      "category": "tavuk-burger", "sort_order": 1,
+      "name_tr": "Chicken Burger", "name_en": "Chicken Burger",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["çıtır tavuk", "göbek marul", "turşu", "kıvırcık", "domates", "özel sos"],
+      "ingredients_en": ["crispy chicken", "romaine lettuce", "pickles", "lettuce", "tomato", "house sauce"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "tavuk-burger", "sort_order": 2,
+      "name_tr": "Mexicano Chicken", "name_en": "Mexicano Chicken",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["çıtır tavuk", "cheddar", "jalapeno sosu", "jalapeno", "turbo soğan", "kıvırcık", "chili sos", "domates"],
+      "ingredients_en": ["crispy chicken", "cheddar", "jalapeño sauce", "jalapeño", "turbo soğan", "lettuce", "chili sauce", "tomato"],
+      "badges": ["acili"], "allergens": []
+    },
+    {
+      "category": "tavuk-burger", "sort_order": 3,
+      "name_tr": "Ranch Chicken", "name_en": "Ranch Chicken",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["çıtır tavuk", "cheddar", "şefin özel sosu", "turşu", "kıvırcık", "domates", "ranch sos", "mor soğan"],
+      "ingredients_en": ["crispy chicken", "cheddar", "chef's special sauce", "pickles", "lettuce", "tomato", "ranch sauce", "red onion"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "tavuk-burger", "sort_order": 4,
+      "name_tr": "Grill Chicken", "name_en": "Grill Chicken",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["ızgara tavuk", "cheddar", "kıvırcık", "domates", "turşu", "mor soğan", "özel sos"],
+      "ingredients_en": ["grilled chicken", "cheddar", "lettuce", "tomato", "pickles", "red onion", "house sauce"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "tavuk-burger", "sort_order": 5,
+      "name_tr": "BBQ Chicken", "name_en": "BBQ Chicken",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["çıtır tavuk", "cheddar", "karamelize soğan", "turşu", "kıvırcık", "domates", "BBQ sos"],
+      "ingredients_en": ["crispy chicken", "cheddar", "caramelized onion", "pickles", "lettuce", "tomato", "BBQ sauce"],
+      "badges": [], "allergens": []
+    },
+
+    {
+      "category": "oburix", "sort_order": 1,
+      "name_tr": "Et Oburix", "name_en": "Beef Oburix",
+      "weight_g": 200,
+      "price_single": 340, "price_menu": 380,
+      "ingredients_tr": ["köfte", "cheddar", "domates", "kıvırcık", "turşu", "mor soğan", "özel sos"],
+      "ingredients_en": ["beef patty", "cheddar", "tomato", "lettuce", "pickles", "red onion", "house sauce"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "oburix", "sort_order": 2,
+      "name_tr": "Tavuk Oburix", "name_en": "Chicken Oburix",
+      "weight_g": 200,
+      "price_single": 310, "price_menu": 350,
+      "ingredients_tr": ["tavuk", "kıvırcık", "domates", "turşu", "mor soğan", "özel sos"],
+      "ingredients_en": ["chicken", "lettuce", "tomato", "pickles", "red onion", "house sauce"],
+      "badges": [], "allergens": []
+    },
+
+    {
+      "category": "baget-sandvic", "sort_order": 1,
+      "name_tr": "Sosisli Sandviç", "name_en": "Sausage Sandwich",
+      "weight_g": null,
+      "price_single": 240, "price_menu": 280,
+      "ingredients_tr": ["sosis", "rus salatası", "turşu", "kıvırcık", "domates", "ketçap", "mayonez", "hardal"],
+      "ingredients_en": ["sausage", "russian salad", "pickles", "lettuce", "tomato", "ketchup", "mayonnaise", "mustard"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "baget-sandvic", "sort_order": 2,
+      "name_tr": "Kumru Sandviç", "name_en": "Kumru Sandwich",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["sosis", "sucuk", "kaşar", "turşu", "kıvırcık", "ketçap", "mayonez"],
+      "ingredients_en": ["sausage", "sucuk", "kaşar cheese", "pickles", "lettuce", "ketchup", "mayonnaise"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "baget-sandvic", "sort_order": 3,
+      "name_tr": "Çıtır Tavuk Sandviç", "name_en": "Crispy Chicken Sandwich",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["çıtır tavuk", "göbek marul", "kıvırcık", "domates", "turşu", "özel sos"],
+      "ingredients_en": ["crispy chicken", "romaine lettuce", "lettuce", "tomato", "pickles", "house sauce"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "baget-sandvic", "sort_order": 4,
+      "name_tr": "Izgara Tavuk Sandviç", "name_en": "Grilled Chicken Sandwich",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": ["ızgara tavuk", "domates", "kıvırcık", "turşu", "soğan", "özel sos"],
+      "ingredients_en": ["grilled chicken", "tomato", "lettuce", "pickles", "onion", "house sauce"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "baget-sandvic", "sort_order": 5,
+      "name_tr": "Şinitzel Sandviç", "name_en": "Schnitzel Sandwich",
+      "weight_g": null,
+      "price_single": 240, "price_menu": 280,
+      "ingredients_tr": ["şinitzel", "kıvırcık", "domates", "turşu", "soğan", "özel sos"],
+      "ingredients_en": ["schnitzel", "lettuce", "tomato", "pickles", "onion", "house sauce"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "baget-sandvic", "sort_order": 6,
+      "name_tr": "Nugget Sandviç", "name_en": "Nugget Sandwich",
+      "weight_g": null,
+      "price_single": 240, "price_menu": 280,
+      "ingredients_tr": ["tavuk nugget", "kıvırcık", "domates", "turşu", "soğan", "özel sos"],
+      "ingredients_en": ["chicken nuggets", "lettuce", "tomato", "pickles", "onion", "house sauce"],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "baget-sandvic", "sort_order": 7,
+      "name_tr": "Köfte Sandviç", "name_en": "Meatball Sandwich",
+      "weight_g": null,
+      "price_single": 250, "price_menu": 290,
+      "ingredients_tr": ["kasap köfte", "kıvırcık", "domates", "turşu", "soğan", "özel sos"],
+      "ingredients_en": ["butcher's meatballs", "lettuce", "tomato", "pickles", "onion", "house sauce"],
+      "badges": [], "allergens": []
+    },
+
+    {
+      "category": "cajun-durum", "sort_order": 1,
+      "name_tr": "Classic Cajun Dürüm", "name_en": "Classic Cajun Wrap",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": [], "ingredients_en": [],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "cajun-durum", "sort_order": 2,
+      "name_tr": "BBQ Cajun Dürüm", "name_en": "BBQ Cajun Wrap",
+      "weight_g": null,
+      "price_single": 230, "price_menu": 270,
+      "ingredients_tr": [], "ingredients_en": [],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "cajun-durum", "sort_order": 3,
+      "name_tr": "Cheddar Cajun Dürüm", "name_en": "Cheddar Cajun Wrap",
+      "weight_g": null,
+      "price_single": 220, "price_menu": 270,
+      "ingredients_tr": [], "ingredients_en": [],
+      "badges": [], "allergens": []
+    },
+    {
+      "category": "cajun-durum", "sort_order": 4,
+      "name_tr": "Mexicano Cajun Dürüm", "name_en": "Mexicano Cajun Wrap",
+      "weight_g": null,
+      "price_single": 220, "price_menu": 270,
+      "ingredients_tr": [], "ingredients_en": [],
+      "badges": ["acili"], "allergens": []
+    },
+
+    {
+      "category": "etsiz-burger", "sort_order": 1,
+      "name_tr": "Vejeteryan Burger", "name_en": "Veggie Burger",
+      "weight_g": null,
+      "price_single": 240, "price_menu": 280,
+      "ingredients_tr": [], "ingredients_en": [],
+      "badges": ["vejetaryen"], "allergens": []
+    },
+
+    {
+      "category": "citir", "sort_order": 1,
+      "name_tr": "Tava Patates", "name_en": "Pan Fries",
+      "weight_g": null, "price_single": null, "price_menu": null,
+      "ingredients_tr": [], "ingredients_en": [], "badges": [], "allergens": []
+    },
+    {
+      "category": "citir", "sort_order": 2,
+      "name_tr": "Şinitzel Patates", "name_en": "Schnitzel & Fries",
+      "weight_g": null, "price_single": null, "price_menu": null,
+      "ingredients_tr": [], "ingredients_en": [], "badges": [], "allergens": []
+    },
+    {
+      "category": "citir", "sort_order": 3,
+      "name_tr": "Nugget Patates", "name_en": "Nuggets & Fries",
+      "weight_g": null, "price_single": null, "price_menu": null,
+      "ingredients_tr": [], "ingredients_en": [], "badges": [], "allergens": []
+    },
+    {
+      "category": "citir", "sort_order": 4,
+      "name_tr": "Soğan Halkası Patates", "name_en": "Onion Rings & Fries",
+      "weight_g": null, "price_single": null, "price_menu": null,
+      "ingredients_tr": [], "ingredients_en": [], "badges": [], "allergens": []
+    },
+    {
+      "category": "citir", "sort_order": 5,
+      "name_tr": "Cajun Patates", "name_en": "Cajun Fries",
+      "weight_g": null, "price_single": null, "price_menu": null,
+      "ingredients_tr": [], "ingredients_en": [], "badges": [], "allergens": []
+    },
+    {
+      "category": "citir", "sort_order": 6,
+      "name_tr": "Çıtır Tavuk Patates", "name_en": "Crispy Chicken & Fries",
+      "weight_g": null, "price_single": null, "price_menu": null,
+      "ingredients_tr": [], "ingredients_en": [], "badges": [], "allergens": []
+    },
+    {
+      "category": "citir", "sort_order": 7,
+      "name_tr": "Köfte Patates", "name_en": "Meatballs & Fries",
+      "weight_g": null, "price_single": null, "price_menu": null,
+      "ingredients_tr": [], "ingredients_en": [], "badges": [], "allergens": []
+    }
+  ]
+}
