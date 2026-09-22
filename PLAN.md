@@ -296,10 +296,14 @@ gerçek telefonda görmek.
 - [x] Zod şeması `_en` alanlarını **baştan** içerir; Faz 3'te şema
       değişmez, sadece `/en` rotası açılır
 - [x] Alt bilgi: telefon (tıkla-ara), adres (haritada aç), çalışma saatleri
-- [ ] Cloudflare Pages'e deploy + alan adı bağlanması
+- [x] Cloudflare'e deploy (Workers + statik asset, `workers.dev` adresi).
+      Alan adı bilinçli olarak Faz 4 öncesine ertelendi; QR'a basılacak
+      adres o zaman netleşir
 - [ ] **Gerçek telefonla restoranda test**
 
 **Çıkış kriteri:** telefondan URL açılıyor, Lighthouse mobil ≥ 95.
+(Ölçüldü: Performance 100, Accessibility 100, Best Practices 96, SEO 90;
+sayfa 19 KB, CLS 0. SEO eksiği meta açıklaması, Faz 3'te.)
 
 ### Faz 2 — Supabase + admin paneli
 
