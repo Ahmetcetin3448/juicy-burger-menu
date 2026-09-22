@@ -1,0 +1,37 @@
+---
+import type { Lang } from '../i18n/ui';
+import type { CategoryWithProducts } from '../lib/menu';
+import type { Settings } from '../lib/menuSchema';
+import ProductRow from './ProductRow.astro';
+
+interface Props {
+  lang: Lang;
+  category: CategoryWithProducts;
+  settings: Settings;
+}
+
+const { lang, category, settings } = Astro.props;
+
+// "What the menu price includes" is shown once per category, under the
+// heading, and only where at least one product actually has a menu price.
+const menuIncludes = settings[`menuIncludes_${lang}`].trim();
+const hasMenuPrice = category.products.some((product) => product.price_menu !== null);
+---
+
+<section id={category.slug} data-category-section class="pt-5">
+  <h2 class="font-display text-3xl uppercase leading-none tracking-wide text-accent">
+    {category[`name_${lang}`]}
+  </h2>
+  {
+    menuIncludes && hasMenuPrice && (
+      <p class="mt-1 text-sm text-muted">{menuIncludes}</p>
+    )
+  }
+  <ul class="mt-2 divide-y divide-rule border-t border-rule" role="list">
+    {
+      category.products.map((product) => (
+        <ProductRow lang={lang} currency={settings.currency} product={product} />
+      ))
+    }
+  </ul>
+</section>

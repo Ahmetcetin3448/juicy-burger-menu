@@ -1,0 +1,43 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import { formatPrice } from '../lib/formatPrice';
+
+interface Props {
+  lang: Lang;
+  currency: string;
+  priceSingle: number | null;
+  priceMenu: number | null;
+}
+
+const { lang, currency, priceSingle, priceMenu } = Astro.props;
+const t = ui[lang];
+
+// Display rules (PLAN.md "Fiyat kuralı"):
+//   both     -> "Tek 260 ₺ · Menü 300 ₺", menu price in secondary weight
+//   single   -> "260 ₺", no label
+//   menu     -> "Menü 300 ₺"
+//   neither  -> caller never renders the product
+// On phone widths the two prices stack (single on the name row, menu just
+// below it); from `sm` up they sit on one line separated by a middle dot.
+const hasBoth = priceSingle !== null && priceMenu !== null;
+---
+
+<p class="flex shrink-0 flex-col items-end text-right text-[0.95rem] leading-tight whitespace-nowrap sm:flex-row sm:items-baseline">
+  {
+    priceSingle !== null && (
+      <span class="font-semibold">
+        {hasBoth && <span class="font-normal text-muted">{t.single} </span>}
+        {formatPrice(priceSingle, lang, currency)}
+      </span>
+    )
+  }
+  {hasBoth && <span class="hidden text-muted sm:inline"> · </span>}
+  {
+    priceMenu !== null && (
+      <span class:list={[hasBoth ? 'text-muted' : 'font-semibold']}>
+        <span class="font-normal text-muted">{t.menu} </span>
+        {formatPrice(priceMenu, lang, currency)}
+      </span>
+    )
+  }
+</p>

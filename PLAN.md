@@ -275,12 +275,12 @@ Bir fazı bitirmeden sonrakine geçilmez.
 Veri henüz `src/data/menu.json` dosyasında sabit. Amaç: QR'ın çalıştığını
 gerçek telefonda görmek.
 
-- [ ] Astro + TypeScript + Tailwind projesi kurulumu
-- [ ] `menu.json` için Zod şeması ve **build sırasında doğrulama**
+- [x] Astro + TypeScript + Tailwind projesi kurulumu
+- [x] `menu.json` için Zod şeması ve **build sırasında doğrulama**
       (geçersiz veri build'i patlatır, canlıya çıkmaz)
-- [ ] Menü sayfası: kategori başlıkları + ürün listesi
-- [ ] Sticky kategori navigasyonu (yatay kaydırmalı çip şeridi)
-- [ ] **Fotoğrafsız-öncelikli tasarım.** Menünün tamamı şu an fotoğrafsız ve
+- [x] Menü sayfası: kategori başlıkları + ürün listesi
+- [x] Sticky kategori navigasyonu (yatay kaydırmalı çip şeridi)
+- [x] **Fotoğrafsız-öncelikli tasarım.** Menünün tamamı şu an fotoğrafsız ve
       fotoğraflar aylar içinde tek tek eklenecek. Tasarım hiç fotoğraf
       yokken de eksiksiz görünmeli, fotoğraf geldikçe iyileşmeli — tersi
       değil. Bu yüzden düzen fotoğraf ızgarası değil, **tipografik liste**:
@@ -289,13 +289,13 @@ gerçek telefonda görmek.
       hizalı. Fotoğraf varsa satırın soluna 72px kare olarak girer, yoksa
       satır kayma yapmadan kapanır. Boş gri kutu, "fotoğraf yok" ikonu
       veya yer tutucu görsel **kullanılmaz**
-- [ ] **Görsel yön: basılı menünün dijitali.** `docs/reference/menu-print.png`
+- [x] **Görsel yön: basılı menünün dijitali.** `docs/reference/menu-print.png`
       referans alınır. Kalın, dar, büyük harf başlıklar; satır listesi; kart
       yok, gradient yok, emoji yok. Ayrıntılı yasaklar CLAUDE.md "Tasarım"
       bölümünde — Faz 1'in çıkış kriterlerinden biri o listeye uymaktır
-- [ ] Zod şeması `_en` alanlarını **baştan** içerir; Faz 3'te şema
+- [x] Zod şeması `_en` alanlarını **baştan** içerir; Faz 3'te şema
       değişmez, sadece `/en` rotası açılır
-- [ ] Alt bilgi: telefon (tıkla-ara), adres (haritada aç), çalışma saatleri
+- [x] Alt bilgi: telefon (tıkla-ara), adres (haritada aç), çalışma saatleri
 - [ ] Cloudflare Pages'e deploy + alan adı bağlanması
 - [ ] **Gerçek telefonla restoranda test**
 

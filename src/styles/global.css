@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Display face for category and product names: bold, condensed, uppercase.
+   Single subset (Latin + Turkish), ~10 KB. */
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/oswald-700-latin-tr.woff2") format("woff2");
+}
+
+/* Color tokens. Dark theme is primary; light theme arrives in Phase 3. */
+:root {
+  --bg: #16130f;
+  --surface: #211d18;
+  --text: #f4eee3;
+  --muted: #a99f92;
+  --accent: #f5c518;
+  --rule: #322c25;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-rule: var(--rule);
+  --font-display: "Oswald", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Anchored sections must clear the sticky category nav. */
+[data-category-section] {
+  scroll-margin-top: var(--nav-offset, 56px);
+}
+
+/* Hide the horizontal scrollbar of the nav strip without disabling scroll. */
+.nav-strip {
+  scrollbar-width: none;
+}
+.nav-strip::-webkit-scrollbar {
+  display: none;
+}

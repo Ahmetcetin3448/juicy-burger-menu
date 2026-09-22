@@ -1,0 +1,83 @@
+---
+import { DAYS, ui, type Lang } from '../i18n/ui';
+import type { Settings } from '../lib/menuSchema';
+
+interface Props {
+  lang: Lang;
+  settings: Settings;
+}
+
+const { lang, settings } = Astro.props;
+const t = ui[lang];
+
+const phone = settings.phone?.trim() ?? '';
+const address = settings.address?.trim() ?? '';
+const instagram = settings.instagram?.trim().replace(/^@/, '') ?? '';
+const notice = settings[`notice_${lang}`].trim();
+
+const hours = settings.working_hours
+  ? DAYS.flatMap((day) => {
+      const value = settings.working_hours?.[day];
+      return value ? [{ day, value }] : [];
+    })
+  : [];
+
+const telHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
+const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+
+const hasContent = phone || address || instagram || hours.length > 0 || notice;
+---
+
+{
+  hasContent && (
+    <footer class="mt-10 border-t border-rule pb-10 pt-6 text-sm text-muted">
+      <div class="flex flex-col gap-3">
+        {phone && (
+          <p>
+            <a href={telHref} class="inline-flex min-h-11 items-center text-text underline underline-offset-4">
+              {phone}
+            </a>
+            <span> · {t.call}</span>
+          </p>
+        )}
+        {address && (
+          <p>
+            <a
+              href={mapHref}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-11 items-center text-text underline underline-offset-4"
+            >
+              {address}
+            </a>
+            <span> · {t.openMap}</span>
+          </p>
+        )}
+        {instagram && (
+          <p>
+            <a
+              href={`https://instagram.com/${instagram}`}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-11 items-center text-text underline underline-offset-4"
+            >
+              @{instagram}
+            </a>
+          </p>
+        )}
+        {hours.length > 0 && (
+          <dl>
+            <dt class="font-semibold text-text">{t.hours}</dt>
+            {hours.map(({ day, value }) => (
+              <dd class="flex gap-2">
+                <span class="w-8">{t.days[day]}</span>
+                <span>{value}</span>
+              </dd>
+            ))}
+          </dl>
+        )}
+        {notice && <p>{notice}</p>}
+      </div>
+    </footer>
+  )
+}

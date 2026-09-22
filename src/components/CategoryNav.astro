@@ -1,0 +1,103 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import type { CategoryWithProducts } from '../lib/menu';
+
+interface Props {
+  lang: Lang;
+  categories: CategoryWithProducts[];
+}
+
+const { lang, categories } = Astro.props;
+const t = ui[lang];
+---
+
+<nav
+  aria-label={t.categoriesLabel}
+  data-category-nav
+  class="sticky top-0 z-10 border-b border-rule bg-bg"
+>
+  <ul class="nav-strip flex overflow-x-auto px-1" role="list">
+    {
+      categories.map((category) => (
+        <li class="shrink-0">
+          <a
+            href={`#${category.slug}`}
+            class="font-display flex min-h-11 items-center px-3 text-[0.95rem] uppercase tracking-wide text-muted aria-[current=true]:text-accent aria-[current=true]:shadow-[inset_0_-2px_0_var(--accent)]"
+          >
+            {category[`name_${lang}`]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  // Highlights the category currently under the sticky nav and keeps its
+  // chip scrolled into view. Progressive enhancement: anchors work without it.
+  const nav = document.querySelector<HTMLElement>('[data-category-nav]');
+
+  if (nav) {
+    const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'));
+    const sections = links
+      .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+      .filter((pair): pair is { link: HTMLAnchorElement; section: HTMLElement } =>
+        pair.section !== null,
+      );
+
+    document.documentElement.style.setProperty('--nav-offset', `${nav.offsetHeight}px`);
+
+    let active: HTMLAnchorElement | null = null;
+    // A tap activates its chip directly. The anchor jump fires one scroll
+    // event, which must not override that choice; the user's next scroll does.
+    let ignoreNextScroll = false;
+
+    const setActive = (link: HTMLAnchorElement) => {
+      if (link === active) return;
+      active?.removeAttribute('aria-current');
+      link.setAttribute('aria-current', 'true');
+      link.scrollIntoView({ block: 'nearest', inline: 'center' });
+      active = link;
+    };
+
+    const update = () => {
+      const threshold = nav.offsetHeight + 8;
+      let current = sections[0];
+      for (const pair of sections) {
+        if (pair.section.getBoundingClientRect().top <= threshold) current = pair;
+        else break;
+      }
+      if (current) setActive(current.link);
+    };
+
+    for (const { link } of sections) {
+      link.addEventListener('click', () => {
+        setActive(link);
+        ignoreNextScroll = true;
+        window.setTimeout(() => {
+          ignoreNextScroll = false;
+        }, 300);
+      });
+    }
+
+    let ticking = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ignoreNextScroll) {
+          ignoreNextScroll = false;
+          return;
+        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          update();
+        });
+      },
+      { passive: true },
+    );
+
+    update();
+  }
+</script>

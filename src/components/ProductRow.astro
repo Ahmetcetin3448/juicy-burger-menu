@@ -1,0 +1,88 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import type { Product } from '../lib/menuSchema';
+import PriceLine from './PriceLine.astro';
+
+interface Props {
+  lang: Lang;
+  currency: string;
+  product: Product;
+}
+
+const { lang, currency, product } = Astro.props;
+const t = ui[lang];
+
+const name = product[`name_${lang}`];
+const ingredients = product[`ingredients_${lang}`];
+const note = product[`note_${lang}`];
+
+// Small meta line: weight and badges. Empty parts are simply absent.
+const meta: string[] = [];
+if (product.weight_g !== null) meta.push(`${product.weight_g} ${t.grams}`);
+for (const badge of product.badges) meta.push(t.badges[badge]);
+if (product.is_sold_out) meta.push(t.soldOut);
+
+// Allergens appear only once the owner has confirmed them.
+const allergens = product.allergens_confirmed
+  ? product.allergens.map((allergen) => t.allergens[allergen])
+  : [];
+---
+
+<li
+  class:list={[
+    'flex gap-3 py-2.5',
+    product.is_sold_out && 'opacity-60',
+  ]}
+>
+  {
+    product.image_path && (
+      <img
+        src={product.image_path}
+        alt=""
+        width="72"
+        height="72"
+        loading="lazy"
+        decoding="async"
+        class="h-18 w-18 shrink-0 object-cover"
+      />
+    )
+  }
+  <div class="min-w-0 flex-1">
+    <div class="flex items-baseline justify-between gap-3">
+      <h3 class="font-display text-[1.15rem] uppercase leading-tight tracking-wide">
+        {name}
+        {
+          meta.length > 0 && (
+            <span class="font-body ml-1 text-xs font-normal normal-case tracking-normal text-muted">
+              {meta.map((part, index) => (
+                <>
+                  {index > 0 && ' · '}
+                  <span class="whitespace-nowrap">{part}</span>
+                </>
+              ))}
+            </span>
+          )
+        }
+      </h3>
+      <PriceLine
+        lang={lang}
+        currency={currency}
+        priceSingle={product.price_single}
+        priceMenu={product.price_menu}
+      />
+    </div>
+    {
+      ingredients.length > 0 && (
+        <p class="mt-0.5 text-sm leading-tight text-muted">{ingredients.join(', ')}</p>
+      )
+    }
+    {note && <p class="mt-0.5 text-sm text-muted">{note}</p>}
+    {
+      allergens.length > 0 && (
+        <p class="mt-0.5 text-xs text-muted">
+          {t.allergensLabel}: {allergens.join(', ')}
+        </p>
+      )
+    }
+  </div>
+</li>

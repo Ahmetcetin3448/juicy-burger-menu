@@ -1,0 +1,34 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import { menu } from '../lib/menu';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryNav from './CategoryNav.astro';
+import CategorySection from './CategorySection.astro';
+import SiteFooter from './SiteFooter.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const { settings, categories } = menu;
+
+const businessName = settings.business_name.trim();
+const title = businessName ? `${businessName} · ${t.menuTitle}` : t.menuTitle;
+---
+
+<BaseLayout lang={lang} title={title}>
+  {
+    businessName && (
+      <header class="px-4 pt-4 pb-2">
+        <h1 class="font-display text-2xl uppercase leading-none tracking-wide">{businessName}</h1>
+      </header>
+    )
+  }
+  <CategoryNav lang={lang} categories={categories} />
+  <main class="mx-auto max-w-2xl px-4">
+    {categories.map((category) => <CategorySection lang={lang} category={category} settings={settings} />)}
+    <SiteFooter lang={lang} settings={settings} />
+  </main>
+</BaseLayout>
