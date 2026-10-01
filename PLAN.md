@@ -158,8 +158,8 @@ create table products (
   is_sold_out   boolean not null default false,
   updated_at    timestamptz not null default now(),
 
-  -- en az bir fiyat olmalı; ikisi de yoksa ürün yayınlanamaz
-  constraint has_price check (price_single is not null or price_menu is not null)
+  -- NOT: 'en az bir fiyat' kuralı DB kısıtı DEĞİL. Fiyatsız ürün (Çıtır)
+  -- panelde 'Eksikler' listesinde durur; build onu zaten yayınlamaz.
 );
 
 -- işletme bilgisi (tek satır)
@@ -307,8 +307,10 @@ sayfa 19 KB, CLS 0. SEO eksiği meta açıklaması, Faz 3'te.)
 
 ### Faz 2 — Supabase + admin paneli
 
-- [ ] Supabase projesi, şema migration'ları, RLS politikaları
-- [ ] `menu.json` verisinin DB'ye taşınması (seed script)
+- [x] Supabase projesi, şema migration'ları, RLS politikaları
+      (`supabase/migrations/0001_schema.sql`; kurulum adımları `supabase/README.md`)
+- [x] `menu.json` verisinin DB'ye taşınması (`npm run seed` → `supabase/seed.sql`,
+      SQL Editor'a yapıştırılır; service-role key gerekmez)
 - [ ] Build sırasında veriyi DB'den çekme (service-role key, `.env`)
 - [ ] `/admin` — Supabase Auth ile e-posta+şifre girişi
 - [ ] Panel ekranları:
