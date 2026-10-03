@@ -45,8 +45,8 @@ export const settingsSchema = z.object({
   address: z.string().nullable().default(null),
   instagram: z.string().nullable().default(null),
   working_hours: z.partialRecord(z.enum(DAYS), z.string().min(1)).nullable().default(null),
-  menuIncludes_tr: z.string().default(''),
-  menuIncludes_en: z.string().default(''),
+  menu_includes_tr: z.string().default(''),
+  menu_includes_en: z.string().default(''),
   notice_tr: z.string().default(''),
   notice_en: z.string().default(''),
 });

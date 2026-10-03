@@ -311,7 +311,8 @@ sayfa 19 KB, CLS 0. SEO eksiği meta açıklaması, Faz 3'te.)
       (`supabase/migrations/0001_schema.sql`; kurulum adımları `supabase/README.md`)
 - [x] `menu.json` verisinin DB'ye taşınması (`npm run seed` → `supabase/seed.sql`,
       SQL Editor'a yapıştırılır; service-role key gerekmez)
-- [ ] Build sırasında veriyi DB'den çekme (service-role key, `.env`)
+- [x] Build sırasında veriyi DB'den çekme (service-role key, Cloudflare build
+      değişkeni). Yerelde `MENU_SOURCE=json` ile JSON'dan build alınabilir
 - [ ] `/admin` — Supabase Auth ile e-posta+şifre girişi
 - [ ] Panel ekranları:
   - **Panel telefon-öncelikli tasarlanır.** Sahibi tezgâh başında

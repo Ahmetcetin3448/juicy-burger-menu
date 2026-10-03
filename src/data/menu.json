@@ -15,8 +15,8 @@
   "settings": {
     "business_name": "",
     "currency": "TRY",
-    "menuIncludes_tr": "",
-    "menuIncludes_en": "",
+    "menu_includes_tr": "",
+    "menu_includes_en": "",
     "notice_tr": "Fiyatlarımıza KDV dahildir.",
     "notice_en": "All prices include VAT."
   },

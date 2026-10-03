@@ -14,7 +14,7 @@ const { lang, category, settings } = Astro.props;
 
 // "What the menu price includes" is shown once per category, under the
 // heading, and only where at least one product actually has a menu price.
-const menuIncludes = settings[`menuIncludes_${lang}`].trim();
+const menuIncludes = settings[`menu_includes_${lang}`].trim();
 const hasMenuPrice = category.products.some((product) => product.price_menu !== null);
 ---
 

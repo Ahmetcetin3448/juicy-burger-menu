@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import raw from '../data/menu.json';
+import { MENU_SOURCE, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_URL } from 'astro:env/server';
 import { menuSchema, type Category, type Product, type Settings } from './menuSchema';
+import { fetchMenuFromSupabase } from './supabaseMenu';
 
 export interface CategoryWithProducts extends Category {
   products: Product[];
@@ -18,15 +19,39 @@ export function isPublishable(product: Product): boolean {
 }
 
 function fail(message: string): never {
-  throw new Error(`menu.json is invalid:\n${message}`);
+  throw new Error(`Menu data is invalid:\n${message}`);
 }
 
 /**
- * Validates src/data/menu.json at build time. Any structural or referential
- * problem throws, which fails `astro build` before bad data can go live.
+ * Loads raw menu data at build time.
+ * Default source is Supabase (service-role key, build environment only).
+ * MENU_SOURCE=json reads src/data/menu.json instead, for local work without
+ * database access. It must be set explicitly so a misconfigured deploy fails
+ * loudly instead of silently shipping stale JSON prices.
  */
-export function loadMenu(): Menu {
-  const parsed = menuSchema.safeParse(raw);
+async function loadRaw(): Promise<unknown> {
+  if (MENU_SOURCE === 'json') {
+    const json = await import('../data/menu.json');
+    return json.default;
+  }
+
+  const url = SUPABASE_URL;
+  const key = SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    fail(
+      'SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set for the build ' +
+        '(or MENU_SOURCE=json to build from src/data/menu.json).',
+    );
+  }
+  return fetchMenuFromSupabase(url, key);
+}
+
+/**
+ * Validates the menu at build time. Any structural or referential problem
+ * throws, which fails `astro build` before bad data can go live.
+ */
+export async function loadMenu(): Promise<Menu> {
+  const parsed = menuSchema.safeParse(await loadRaw());
   if (!parsed.success) fail(z.prettifyError(parsed.error));
 
   const { settings, categories, products } = parsed.data;
@@ -60,4 +85,4 @@ export function loadMenu(): Menu {
   return { settings, categories: grouped };
 }
 
-export const menu: Menu = loadMenu();
+export const menu: Menu = await loadMenu();
