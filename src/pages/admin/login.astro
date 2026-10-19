@@ -1,0 +1,70 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { admin } from '../../i18n/admin';
+
+export const prerender = false;
+
+const { supabase, user } = Astro.locals;
+const t = admin.login;
+
+// Already signed in as an admin: nothing to do here.
+if (user && Astro.request.method === 'GET') return Astro.redirect('/admin', 303);
+
+let error: string | null = null;
+let email = '';
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  email = String(form.get('email') ?? '').trim();
+  const password = String(form.get('password') ?? '');
+
+  if (!email || !password) {
+    error = t.missing;
+  } else {
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    if (signInError) {
+      error = signInError.status === 400 ? t.invalid : t.unavailable;
+    } else {
+      const { data: isAdmin } = await supabase.rpc('is_admin');
+      if (isAdmin === true) return Astro.redirect('/admin', 303);
+      // Valid credentials but not on the allow-list: drop the session again.
+      await supabase.auth.signOut();
+      error = t.notAdmin;
+    }
+  }
+}
+---
+
+<AdminLayout title={t.heading}>
+  <h1 class="font-display text-3xl uppercase tracking-wide">{t.heading}</h1>
+  <form method="post" class="mt-6 flex flex-col gap-4" novalidate>
+    <label class="flex flex-col gap-1">
+      <span class="text-sm text-muted">{t.email}</span>
+      <input
+        type="email"
+        name="email"
+        value={email}
+        autocomplete="username"
+        required
+        class="min-h-11 border border-rule bg-surface px-3 text-base text-text"
+      />
+    </label>
+    <label class="flex flex-col gap-1">
+      <span class="text-sm text-muted">{t.password}</span>
+      <input
+        type="password"
+        name="password"
+        autocomplete="current-password"
+        required
+        class="min-h-11 border border-rule bg-surface px-3 text-base text-text"
+      />
+    </label>
+    {error && <p role="alert" class="text-sm text-accent">{error}</p>}
+    <button
+      type="submit"
+      class="font-display mt-2 min-h-11 bg-accent px-4 text-lg uppercase tracking-wide text-bg"
+    >
+      {t.submit}
+    </button>
+  </form>
+</AdminLayout>

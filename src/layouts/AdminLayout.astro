@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import { admin } from '../i18n/admin';
+
+interface Props {
+  title: string;
+  /** Signed-in admin email; omitted on the login screen. */
+  userEmail?: string;
+}
+
+const { title, userEmail } = Astro.props;
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} · {admin.title}</title>
+  </head>
+  <body class="bg-bg text-text font-body text-base leading-snug antialiased">
+    <header class="flex min-h-14 items-center justify-between gap-3 border-b border-rule px-4">
+      <a href="/admin" class="font-display text-xl uppercase tracking-wide">{admin.title}</a>
+      {
+        userEmail && (
+          <form method="post" action="/admin/logout" class="flex items-center gap-3">
+            <span class="hidden text-sm text-muted sm:inline">{userEmail}</span>
+            <button
+              type="submit"
+              class="min-h-11 px-3 text-sm text-muted underline underline-offset-4"
+            >
+              {admin.logout}
+            </button>
+          </form>
+        )
+      }
+    </header>
+    <main class="mx-auto max-w-2xl px-4 py-5">
+      <slot />
+    </main>
+  </body>
+</html>

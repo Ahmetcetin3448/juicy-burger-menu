@@ -313,7 +313,8 @@ sayfa 19 KB, CLS 0. SEO eksiği meta açıklaması, Faz 3'te.)
       SQL Editor'a yapıştırılır; service-role key gerekmez)
 - [x] Build sırasında veriyi DB'den çekme (service-role key, Cloudflare build
       değişkeni). Yerelde `MENU_SOURCE=json` ile JSON'dan build alınabilir
-- [ ] `/admin` — Supabase Auth ile e-posta+şifre girişi
+- [x] `/admin` — Supabase Auth ile e-posta+şifre girişi (çerez oturumu,
+      yalnızca `admin_users` listesindekiler girer; Cloudflare Workers'ta SSR)
 - [ ] Panel ekranları:
   - **Panel telefon-öncelikli tasarlanır.** Sahibi tezgâh başında
     telefondan "tükendi" işaretleyecek, fiyat değiştirecek. 390px genişlik

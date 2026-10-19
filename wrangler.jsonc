@@ -1,10 +1,11 @@
 {
-  // Cloudflare Workers config: serves the static Astro build as assets.
-  // Deployed by Workers Builds with `npm run build` then `npx wrangler deploy`.
+  // Cloudflare Workers config. The Astro adapter fills in `main` (the SSR
+  // entry for /admin) and the static assets directory at build time; the
+  // deployable config is written to dist/server/wrangler.json.
   "name": "juicy-burger-menu",
   "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "directory": "./dist",
     "not_found_handling": "404-page"
   }
 }
